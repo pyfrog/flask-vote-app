@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <title>{{ poll.name }}</title>
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation"><a href="index.html">Home</a></li>
+                    <li role="presentation"><a href="vote.html">Vote</a></li>
+                    <li role="presentation" class="active"><a href="results.html">Results</a></li>
+                </ul>
+            </nav>
+            <h1 class="text-muted">Sample Poll Application</h1>
+        </div>
+        <div class="panel panel-default">
+             <div class="panel-heading">
+                  <h2 class="text-muted">{{poll.question}}</h2>
+             </div>
+             <div class="panel-body">
+                  <canvas id="chart"></canvas>
+             </div>
+        </div>        
+        <footer class="footer">
+            <p> Served by {{hostname}}</p>
+            <p> &copy; NoverIT 2017</p>
+        </footer>
+    </div>
+    <script>
+    var ctx = document.getElementById("chart");
+    var chart = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: {
+            labels: [{% for result in results %} "{{result.text}}", {% endfor %}],
+            datasets: [{
+                label: "Votes",
+                data: [{% for result in results %} "{{result.votes}}", {% endfor %}],
+                backgroundColor: "rgba(54, 162, 235, 0.2)",
+                borderColor: "rgb(54, 162, 235)",
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                xAxes: [{ticks:{beginAtZero:true, min:0, stepSize:1}}]
+            }
+        }
+    });
+    </script>
+</body> 
+</html>
