@@ -96,6 +96,7 @@ def results():
 if __name__ == '__main__':
     
     db.create_all()
+    db.session.commit()
     hostname = socket.gethostname()
          
     print "Check if a poll already exists into db"
