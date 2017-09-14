@@ -25,7 +25,7 @@ RUN pip install -r requirements.txt
 ADD . /app
 
 # Mount external volumes for logs and data
-VOLUME ["/app/data", "/app/logs"]
+VOLUME ["/app/data", "/app/seeds", "/app/logs"]
 
 # Expose the port server listen to
 EXPOSE 5000
