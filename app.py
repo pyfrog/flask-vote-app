@@ -111,7 +111,7 @@ if __name__ == '__main__':
     else:
        print "Load seed data from file"
        try: 
-           with open(os.path.join(basedir, 'data/seed_data.json')) as file:
+           with open(os.path.join(basedir, 'seeds/seed_data.json')) as file:
                seed_data = json.load(file)
                print "Start a new poll"
                poll = Poll(seed_data['poll'], seed_data['question'])
