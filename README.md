@@ -10,7 +10,7 @@ This application can be deployed locally. On linux, install git and clone the re
     [root@centos]# yum install -y git
     [root@centos]# git clone https://github.com/kalise/flask-vote-app
     [root@centos]# cd flask-vote-app
-    
+
 Install the dependencies
 
     pip install flask
@@ -23,7 +23,7 @@ and start the application
     Check if a poll already exists into db
     * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 
-Poll question and options are loaded from a JSON file called ``seed_data.json`` under the ``./data`` directory. This file is filled with default values, change it before to start the application. 
+Poll question and options are loaded from a JSON file called ``seed_data.json`` under the ``./seeds`` directory. This file is filled with default values, change it before to start the application.
 
 The DB data file is called ``app.db`` and is located under the ``./data`` directory. To use an external MySQL database, set the environment variables by editing the ``flask.rc`` file under the application directory
 
@@ -68,11 +68,10 @@ Start the container
 
     docker run -d -p 80:5000 --name=vote flask-vote-app:latest
 
-Data directory containing the seed data file ``seed_data.json`` can be mounted as an external volume under the host ``/data`` directory
+Seeds data directory containing the seed data file ``seed_data.json`` can be mounted as an external volume under the host ``/mnt`` directory
 
-    mkdir /data
-    cp flask-vote-app/data/seed_data.json /data
-    docker run -d -p 80:5000 -v /data:/app/data --name=vote flask-vote-app:latest
+    cp flask-vote-app/seeds/seed_data.json /mnt
+    docker run -d -p 80:5000 -v /mnt:/app/seeds --name=vote flask-vote-app:latest
 
 An external MySQL database can be used instead of the internal sqlite by setting the desired env variables
 
@@ -83,5 +82,5 @@ An external MySQL database can be used instead of the internal sqlite by setting
                -e DB_PASS=password \
                -e DB_TYPE=mysql \
                -d -p 80:5000  --name=vote flask-vote-app:latest
- 
+
  Happy polling!
