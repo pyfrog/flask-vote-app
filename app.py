@@ -16,9 +16,7 @@ dbuser  = os.environ.get('DB_USER', '')
 dbpass  = os.environ.get('DB_PASS', '')
 dbtype  = os.environ.get('DB_TYPE', '')
 
-if dbtype == 'mysql':
-   dburi  = dbtype + '://' + dbuser + ':' + dbpass + '@' + dbhost + ':' + dbport + '/' + dbname
-elif dbtype == 'postgresql':
+if dbtype in ('mysql','postgresql'):
    dburi  = dbtype + '://' + dbuser + ':' + dbpass + '@' + dbhost + ':' + dbport + '/' + dbname
 else:
    dburi = 'sqlite:///' + os.path.join(basedir, 'data/app.db')
